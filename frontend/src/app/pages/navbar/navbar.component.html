@@ -1,0 +1,130 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Hotel Pro</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Manage
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Subscribe</a>
+        </li>
+        <li class="nav-item">
+          <div
+            class="nav-link"
+            style="cursor: pointer"
+            (click)="openChangePassword(content)"
+          >
+            Change Password
+          </div>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+      <button
+        class="btn btn-outline-danger ms-2 border-0"
+        type="submit"
+        (click)="logOut()"
+      >
+        Logout
+        <i class="material-symbols-rounded" style="vertical-align: middle">
+          logout
+        </i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Change Password</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss(false)"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label"
+          >Current Password</label
+        >
+        <input
+          type="password"
+          placeholder="Enter Current Password"
+          name="oldPassword"
+          class="form-control"
+          [(ngModel)]="oldPassword"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword2" class="form-label"
+          >New Password</label
+        >
+        <input
+          type="password"
+          placeholder="Enter New Password"
+          class="form-control"
+          name="newPassword"
+          [(ngModel)]="newPassword"
+        />
+        <small class="text-danger" *ngIf="passwordValidator()">
+          Password must be at least 8 characters long ,must contain at least one
+          uppercase letter, one lowercase letter, one number, and one special
+          character
+        </small>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      [disabled]="passwordValidator()"
+      (click)="modal.close(true)"
+    >
+      Update
+    </button>
+  </div>
+</ng-template>
